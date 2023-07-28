@@ -1,48 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+public class VariableJump : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform feetPos;
-    [SerializeField] private float groundDis = 0.25f;
-    [SerializeField] private float jumpTime = 0.3f;
+    public float runSpeed;
+    public Rigidbody2D rb;
+    public BoxCollider2D boxCollider2D;
+    public float buttonTime = 0.5f;
+    public float jumpHeight = 5;
+    public float cancelRate = 100;
+    float jumpTime;
+    bool jumping;
+    bool jumpCancelled;
 
-    private bool isGrounded = false;
-    private bool isJumping = false;
-    private float jumpTimer;
+    public ContactFilter2D ContactFilter;
+
+    //Raycast Ground Check
+    public float distanceToCheck = 0.5f;
+    public bool isGrounded => rb.IsTouching(ContactFilter);
+
 
     private void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDis, groundLayer);
 
-        if (isGrounded && Input.GetButtonDown("Jump"))
+       rb.velocity = new Vector2 (1 * runSpeed, rb.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            isJumping = true;
-            rb.velocity = Vector2.up * jumpForce;
+            float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            jumping = true;
+            jumpCancelled = false;
+            jumpTime = 0;
         }
-
-        if (isJumping && Input.GetButton("Jump"))
+        if (jumping)
         {
-            if (jumpTimer < jumpTime)
+            jumpTime += Time.deltaTime;
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                rb.velocity = Vector2.up * jumpForce;
-                jumpTimer += Time.deltaTime;
+                jumpCancelled = true;
             }
-            else
+            if (jumpTime > buttonTime)
             {
-                isJumping = false;
+                jumping = false;
             }
-        }
-
-        if (Input.GetButtonUp("Jump"))
-        {
-            isJumping = false;
-            jumpTimer = 0f;
         }
     }
+    private void FixedUpdate()
+    {
+        if (jumpCancelled && jumping && rb.velocity.y > 0)
+        {
+            rb.AddForce(Vector2.down * cancelRate);
+        }
+    }
+
 
 }
