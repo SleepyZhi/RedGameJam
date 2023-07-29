@@ -14,7 +14,9 @@ public class GroundHandler : MonoBehaviour
     public float gapSize;
     BoxCollider2D collider;
 
+    private bool initialGapFix = false;
     private bool didGenerateGround = false;
+    private float tempValue;
 
     void Awake()
     {
@@ -43,7 +45,7 @@ public class GroundHandler : MonoBehaviour
         if (!didGenerateGround)
             if (groundRight < screenRight) 
             {
-               didGenerateGround = true;
+                didGenerateGround = true;
                generateGround();
             }
     }
@@ -57,7 +59,10 @@ public class GroundHandler : MonoBehaviour
         float actualHeight = Random.Range(minHeight, maxHeight) - goCollider.size.y / 2;
 
         pos.y = actualHeight;
+
+    
         pos.x = screenRight + gapSize;
+        
         go.transform.position = pos;
     }
 }
