@@ -70,7 +70,7 @@ public class GroundHandler : MonoBehaviour
         {
             GameObject box = Instantiate(obstacle.gameObject);
             float y = goGround.groundHeight;
-            float halfWidth = goCollider.size.x / 2 - 1;
+            float halfWidth = goCollider.size.x / 2 - 1f;
             float left = go.transform.position.x - halfWidth;
             float right = go.transform.transform.position.x + halfWidth;
             float x = Random.Range(left,right);
@@ -83,12 +83,14 @@ public class GroundHandler : MonoBehaviour
         {
             GameObject berry = Instantiate(berries.gameObject);
             float y = goGround.groundHeight;
-            float halfWidth = goCollider.size.x / 2 -1;
+            float halfWidth = goCollider.size.x / 2 - 1f;
             float left = go.transform.position.x - halfWidth;
             float right = go.transform.transform.position.x + halfWidth;
             float x = Random.Range(left, right);
             Vector2 berryPos = new Vector2(x, y);
             berry.transform.position = berryPos;
         }
+    
+
     }
 }

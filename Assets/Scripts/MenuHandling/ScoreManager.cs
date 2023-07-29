@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     public float currentScore = 0f;
+    public float highScore = 0f;
 
     public bool isPlaying = true;
 
@@ -23,6 +24,8 @@ public class ScoreManager : MonoBehaviour
 
     public void GameOver()
     {
+        highScore = currentScore;
+        Time.timeScale = 0;
         currentScore = 0f;
         isPlaying = false;
     }

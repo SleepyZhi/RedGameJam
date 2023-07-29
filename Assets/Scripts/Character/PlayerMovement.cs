@@ -24,11 +24,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        
+        if ((Input.GetKeyDown(KeyCode.Space)|| Input.touchCount > 0) && isGrounded)
         {
             gravity = Physics2D.gravity.y * rb.gravityScale;
-            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (gravity));
+            jumpForce = Mathf.Sqrt(jumpHeight * - 2 * (gravity));
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumping = true;
             jumpCancelled = false;
@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
                 jumping = false;
             }
         }
+        print(Input.touchCount);
     }
     private void FixedUpdate()
     {
