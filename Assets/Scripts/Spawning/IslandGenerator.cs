@@ -8,7 +8,13 @@ public class IslandGenerator : MonoBehaviour
 
     private void Awake()
     {
-        Instantiate(islandPart1, new Vector3(134, 9), Quaternion.identity);
+        SpawnLevelPart(new Vector3(19, -1));
+        SpawnLevelPart(new Vector3(19, -1) + new Vector3(30, 0));
+        SpawnLevelPart(new Vector3(19, -1) + new Vector3(30+30, 0));
     }
 
+    private void SpawnLevelPart(Vector3 spawnPosition)
+    {
+        Instantiate(islandPart1, spawnPosition, Quaternion.identity);
+    }
 }
