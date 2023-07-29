@@ -11,6 +11,7 @@ public class GroundHandler : MonoBehaviour
     public float screenRight;
     public float maxHeight;
     public float minHeight;
+    public float gapSize;
     BoxCollider2D collider;
 
     private bool didGenerateGround = false;
@@ -56,7 +57,7 @@ public class GroundHandler : MonoBehaviour
         float actualHeight = Random.Range(minHeight, maxHeight) - goCollider.size.y / 2;
 
         pos.y = actualHeight;
-        pos.x = screenRight + 30;
+        pos.x = screenRight + gapSize;
         go.transform.position = pos;
     }
 }

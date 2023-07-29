@@ -552,6 +552,7 @@ MonoBehaviour:
   screenRight: 0
   maxHeight: 12
   minHeight: 6
+  gapSize: 20
 --- !u!61 &360123172
 BoxCollider2D:
   m_ObjectHideFlags: 0
