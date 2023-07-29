@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 121641302}
   boxCollider2D: {fileID: 327694609}
-  buttonTime: 0.5
-  jumpHeight: 5
+  buttonTime: 0.2
+  jumpHeight: 6
   cancelRate: 100
   jumpForce: 0
   gravity: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
   groundHeight: 0
   groundRight: 0
   screenRight: 0
-  maxHeight: 12
+  maxHeight: 11
   minHeight: 6
   gapSize: 25
 --- !u!61 &360123172
