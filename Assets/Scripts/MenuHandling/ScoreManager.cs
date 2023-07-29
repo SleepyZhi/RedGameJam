@@ -5,6 +5,9 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
+    public float currentScore = 0f;
+
+    public bool isPlaying = true;
 
     private void Awake()
     {
@@ -12,18 +15,10 @@ public class ScoreManager : MonoBehaviour
             Instance = this;
     }
 
-    public float currentScore = 0f;
-
-    public bool isPlaying = false;
-
-    private void Update()
-    {   if (isPlaying)
+    public void Update()
+    {   
+        if (isPlaying)
             currentScore += Time.deltaTime;
-
-        if (Input.GetKeyDown("k"))
-        {
-            isPlaying = true;
-        }
     }
 
     public void GameOver()
