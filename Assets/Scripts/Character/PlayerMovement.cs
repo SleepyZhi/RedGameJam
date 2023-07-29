@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
             jumping = true;
             jumpCancelled = false;
             jumpTime = 0;
+            Debug.Log(Input.touchCount);
         }
         if (jumping)
         {

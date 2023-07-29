@@ -69,11 +69,11 @@ public class GroundHandler : MonoBehaviour
         for (int i = 0; i<obstacleNum; i++) 
         {
             GameObject box = Instantiate(obstacle.gameObject);
-            float y = goGround.groundHeight;
-            float halfWidth = goCollider.size.x / 2 - 1f;
+            float y = goGround.groundHeight + 1.8f;
+            float halfWidth = goCollider.size.x / 2;
             float left = go.transform.position.x - halfWidth;
             float right = go.transform.transform.position.x + halfWidth;
-            float x = Random.Range(left,right);
+            float x = Random.Range(left + 10, right - 10);
             Vector2 boxPos = new Vector2(x,y);
             box.transform.position = boxPos;
         }
@@ -82,11 +82,11 @@ public class GroundHandler : MonoBehaviour
         for (int i = 0; i < berriesNum; i++)
         {
             GameObject berry = Instantiate(berries.gameObject);
-            float y = goGround.groundHeight;
-            float halfWidth = goCollider.size.x / 2 - 1f;
+            float y = goGround.groundHeight + 2f;
+            float halfWidth = goCollider.size.x / 2;
             float left = go.transform.position.x - halfWidth;
             float right = go.transform.transform.position.x + halfWidth;
-            float x = Random.Range(left, right);
+            float x = Random.Range(left+10, right-10);
             Vector2 berryPos = new Vector2(x, y);
             berry.transform.position = berryPos;
         }
