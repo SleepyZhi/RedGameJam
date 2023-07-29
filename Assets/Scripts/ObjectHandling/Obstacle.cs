@@ -13,7 +13,6 @@ public class Obstacle : MonoBehaviour
         Vector2 pos = transform.position;
         speed += speedMultiplier;
         pos.x -= speed * Time.fixedDeltaTime;
-        Debug.Log(pos.x);
 
         sender = speed * Time.fixedDeltaTime;
         transform.position = pos;

@@ -9,23 +9,21 @@ public class ParallaxMovement : MonoBehaviour
     private Vector2 pos;
     public Vector2 initialPos;
 
-    private void Start()
-    {  
-        initialPos = transform.position;
-    }
 
     private void FixedUpdate()
     {
-        pos = transform.position;
+        if (pos.x < -100)
+        {
+            pos.x = initialPos.x;
+            transform.localPosition = pos;
+        }
+
+        pos = transform.localPosition;
         speed += speedMultiplier;
         pos.x -= speed * Time.fixedDeltaTime;
 
-        if (pos.x <= -50)
-            pos.x = initialPos.x + 40;
-
-        transform.position = pos;
         
+        transform.localPosition = pos;
 
-        
     }
 }

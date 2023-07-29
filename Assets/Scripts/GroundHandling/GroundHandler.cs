@@ -20,6 +20,7 @@ public class GroundHandler : MonoBehaviour
 
     public GameObject obstacle;
     public GameObject berries;
+    public GameObject bush;
     void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
@@ -90,7 +91,20 @@ public class GroundHandler : MonoBehaviour
             Vector2 berryPos = new Vector2(x, y);
             berry.transform.position = berryPos;
         }
-    
+
+        int bushesNum = Random.Range(0, 6);
+        for (int i = 0; i < obstacleNum; i++)
+        {
+            GameObject box = Instantiate(bush.gameObject);
+            float y = goGround.groundHeight + 1f;
+            float halfWidth = goCollider.size.x / 2;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.transform.position.x + halfWidth;
+            float x = Random.Range(left, right);
+            Vector2 bushPos = new Vector2(x, y);
+            box.transform.position = bushPos;
+        }
+
 
     }
 }

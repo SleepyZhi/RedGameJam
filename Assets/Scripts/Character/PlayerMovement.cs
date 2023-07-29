@@ -24,31 +24,35 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
-        if ((Input.GetKeyDown(KeyCode.Space)|| Input.touchCount > 0) && isGrounded)
+        if (isGrounded)
+        {
+            jumpTime = 0;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && (Input.touches[0].phase == TouchPhase.Began) && isGrounded && jumpTime == 0)
         {
             gravity = Physics2D.gravity.y * rb.gravityScale;
             jumpForce = Mathf.Sqrt(jumpHeight * - 2 * (gravity));
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumping = true;
             jumpCancelled = false;
-            jumpTime = 0;
-            Debug.Log(Input.touchCount);
         }
         if (jumping)
         {
             jumpTime += Time.deltaTime;
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Space) || Input.touches[0].phase == TouchPhase.Ended)
             {
                 jumpCancelled = true;
             }
+
             if (jumpTime > buttonTime)
             {
                 jumping = false;
             }
         }
-        print(Input.touchCount);
     }
+
     private void FixedUpdate()
     {
         if (jumpCancelled && jumping && rb.velocity.y > 0)

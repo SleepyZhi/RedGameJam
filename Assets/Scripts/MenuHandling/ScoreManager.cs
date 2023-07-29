@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
     public float currentScore = 0f;
     public float highScore = 0f;
+    public TextMeshProUGUI textHighScore;
+    public TextMeshProUGUI textCurrentScore;
 
     public bool isPlaying = true;
 
@@ -20,14 +23,21 @@ public class ScoreManager : MonoBehaviour
     {   
         if (isPlaying)
             currentScore += Time.deltaTime;
+
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+        }
     }
 
     public void GameOver()
     {
-        highScore = currentScore;
+        
         Time.timeScale = 0;
-        currentScore = 0f;
         isPlaying = false;
+
+        textHighScore.text = "Highscore:\n" + Mathf.RoundToInt(highScore).ToString();
+        textCurrentScore.text = "Score: " + Mathf.RoundToInt(currentScore).ToString();
     }
 
     public string PrettyScore()

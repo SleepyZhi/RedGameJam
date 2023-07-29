@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.Build.Content;
 
 public class ScoreHandler : MonoBehaviour
 {
@@ -20,4 +19,3 @@ public class ScoreHandler : MonoBehaviour
         scoreUI.text = ScoreManager.Instance.PrettyScore();
     }
 }
-
