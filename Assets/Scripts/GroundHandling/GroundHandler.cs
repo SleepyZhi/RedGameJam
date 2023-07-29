@@ -14,21 +14,15 @@ public class GroundHandler : MonoBehaviour
     public float gapSize;
     BoxCollider2D collider;
 
-    private bool initialGapFix = false;
     private bool didGenerateGround = false;
     private float tempValue;
+    private float actualGapSize;
 
     void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
         groundHeight = transform.position.y + (collider.size.y / 2);
         screenRight = Camera.main.transform.position.x * 2;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -48,6 +42,8 @@ public class GroundHandler : MonoBehaviour
                 didGenerateGround = true;
                generateGround();
             }
+
+        actualGapSize = gapSize;
     }
 
     private void generateGround()
@@ -59,9 +55,8 @@ public class GroundHandler : MonoBehaviour
         float actualHeight = Random.Range(minHeight, maxHeight) - goCollider.size.y / 2;
 
         pos.y = actualHeight;
-
-    
-        pos.x = screenRight + gapSize;
+        pos.x = screenRight + actualGapSize;
+        
         
         go.transform.position = pos;
     }
