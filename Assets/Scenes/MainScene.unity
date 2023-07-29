@@ -550,8 +550,8 @@ MonoBehaviour:
   groundHeight: 0
   groundRight: 0
   screenRight: 0
-  maxHeight: 0
-  minHeight: 0
+  maxHeight: 12
+  minHeight: 6
 --- !u!61 &360123172
 BoxCollider2D:
   m_ObjectHideFlags: 0
