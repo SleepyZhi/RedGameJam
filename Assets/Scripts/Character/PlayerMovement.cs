@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     //Jump Variables
     public Rigidbody2D rb;
+    public Animator animator;
     public BoxCollider2D boxCollider2D;
     public float buttonTime = 0.5f;
     public float jumpHeight = 5;
@@ -17,27 +18,20 @@ public class Player : MonoBehaviour
 
     public ContactFilter2D ContactFilter;
 
-    //Raycast Ground Check
-    public float distanceToCheck = 0.5f;
     public bool isGrounded => rb.IsTouching(ContactFilter);
-
 
     private void Update()
     {
-        if (isGrounded)
-        {
-            jumpTime = 0;
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && (Input.touches[0].phase == TouchPhase.Began) && isGrounded && jumpTime == 0)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && (Input.touches[0].phase == TouchPhase.Began)) && isGrounded)
         {
             gravity = Physics2D.gravity.y * rb.gravityScale;
-            jumpForce = Mathf.Sqrt(jumpHeight * - 2 * (gravity));
+            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (gravity));
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumping = true;
             jumpCancelled = false;
+            jumpTime = 0;
         }
+
         if (jumping)
         {
             jumpTime += Time.deltaTime;
@@ -46,11 +40,14 @@ public class Player : MonoBehaviour
                 jumpCancelled = true;
             }
 
+
             if (jumpTime > buttonTime)
             {
                 jumping = false;
+
             }
         }
+
     }
 
     private void FixedUpdate()
