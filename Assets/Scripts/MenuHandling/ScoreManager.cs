@@ -16,7 +16,14 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore");
     }
 
     public void Update()
@@ -27,6 +34,7 @@ public class ScoreManager : MonoBehaviour
         if (currentScore > highScore)
         {
             highScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", Mathf.RoundToInt(highScore));
         }
     }
 
@@ -38,6 +46,9 @@ public class ScoreManager : MonoBehaviour
 
         textHighScore.text = "Highscore:\n" + Mathf.RoundToInt(highScore).ToString();
         textCurrentScore.text = "Score: " + Mathf.RoundToInt(currentScore).ToString();
+
+        
+
     }
 
     public string PrettyScore()

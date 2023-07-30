@@ -23,6 +23,7 @@ public class GroundHandler : MonoBehaviour
     public GameObject berries;
     public GameObject bush;
     public GameObject melons;
+    public GameObject crocodile;
     public GameObject tree1;
     public GameObject tree2;
     public GameObject tree3;
@@ -97,7 +98,7 @@ public class GroundHandler : MonoBehaviour
             Vector2 berryPos = new Vector2(x, y);
             berry.transform.position = berryPos;
         }
-        int melonNum = Random.Range(0, 2);
+        int melonNum = Random.Range(0, 4);
         if (melonNum == 1)
         {
             GameObject melon = Instantiate(melons.gameObject);
@@ -110,7 +111,19 @@ public class GroundHandler : MonoBehaviour
             melon.transform.position = melonPos;
         }
 
-        int bushesNum = Random.Range(0, 6);
+        //int crocNum = Random.Range(0, 2);
+        //if (crocNum == 1)
+        //{
+        //    GameObject croc = Instantiate(crocodile.gameObject);
+        //    float y = goGround.groundHeight + 0.5f;
+        //    float halfWidth = goCollider.size.x / 2;
+        //    float left = go.transform.position.x - halfWidth;
+        //    float right = go.transform.transform.position.x + halfWidth;
+        //    float x = Random.Range(left + 15, right - 10);
+        //    Vector2 crocPos = new Vector2(x, y);
+        //    croc.transform.position = crocPos;
+        //}
+            int bushesNum = Random.Range(0, 6);
         for (int i = 0; i < obstacleNum; i++)
         {
             GameObject box = Instantiate(bush.gameObject);

@@ -9,6 +9,10 @@ public class PlayerCollision : MonoBehaviour
 
     [SerializeField] GameObject loseMenu;
     [SerializeField] float berriesScore;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip lost;
+
+    public bool hitCroc = false;
     private Vector2 pos;
 
     private void Update()
@@ -17,6 +21,8 @@ public class PlayerCollision : MonoBehaviour
         if (pos.x < -10)
         {
             loseMenu.SetActive(true);
+            audioSource.Stop();
+            audioSource.PlayOneShot(lost);
             Destroy(gameObject);
             ScoreManager.Instance.GameOver();
         }
@@ -24,6 +30,8 @@ public class PlayerCollision : MonoBehaviour
         if (pos.y < 0)
         {
             loseMenu.SetActive(true);
+            audioSource.Stop();
+            audioSource.PlayOneShot(lost);
             Destroy(gameObject);
             ScoreManager.Instance.GameOver();
         }
@@ -35,6 +43,8 @@ public class PlayerCollision : MonoBehaviour
         if (other.transform.tag == "Obstacles")
         {
             loseMenu.SetActive(true);
+            audioSource.Stop();
+            audioSource.PlayOneShot(lost);
             Destroy(gameObject);
             ScoreManager.Instance.GameOver();
         }

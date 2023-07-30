@@ -20,6 +20,11 @@ public class SettingHandler : MonoBehaviour
         }
     }
 
+    public void OnStartPress()
+    {
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+    }
     public void OnResetButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

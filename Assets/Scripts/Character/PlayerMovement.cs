@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
+
     //Jump Variables
     public Rigidbody2D rb;
     public Animator animator;
@@ -12,6 +13,11 @@ public class Player : MonoBehaviour
     public float cancelRate = 100;
     public float jumpForce;
     public float gravity;
+
+    private float rbCheckerY;
+    private float counter;
+
+    private bool hitCroc = false;
     float jumpTime;
     bool jumping;
     bool jumpCancelled;
@@ -22,6 +28,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //if (hitCroc)
+        //{
+        //    animator.Play("Capybara on croc animation");
+        //}
+
         if ((Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 && (Input.touches[0].phase == TouchPhase.Began)) && isGrounded)
         {
             gravity = Physics2D.gravity.y * rb.gravityScale;
@@ -30,7 +41,9 @@ public class Player : MonoBehaviour
             jumping = true;
             jumpCancelled = false;
             jumpTime = 0;
+            animator.Play("Capybara jump animation");
         }
+
 
         if (jumping)
         {
@@ -39,15 +52,32 @@ public class Player : MonoBehaviour
             {
                 jumpCancelled = true;
             }
-
-
             if (jumpTime > buttonTime)
             {
                 jumping = false;
-
             }
         }
 
+        if (rb.velocity.y < 0)
+        {
+            animator.Play("Capybara fall animation");
+        }
+
+
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.tag == "Ground")
+        {
+            animator.Play("Capybara_walk_animation");
+        }
+
+        //if (collision.transform.tag == "Croc" && hitCroc != false)
+        //{
+        //    hitCroc = true;
+        //}
     }
 
     private void FixedUpdate()
