@@ -18,9 +18,15 @@ public class GroundHandler : MonoBehaviour
     private float tempValue;
     private float actualGapSize;
 
+    //Referencing Game Objects
     public GameObject obstacle;
     public GameObject berries;
     public GameObject bush;
+    public GameObject melons;
+    public GameObject tree1;
+    public GameObject tree2;
+    public GameObject tree3;
+
     void Awake()
     {
         collider = GetComponent<BoxCollider2D>();
@@ -65,7 +71,7 @@ public class GroundHandler : MonoBehaviour
         GroundHandler goGround = go.GetComponent<GroundHandler>();
         goGround.groundHeight= go.transform.position.y + (goCollider.size.y / 2);
 
-
+        //yes
         int obstacleNum = Random.Range(0, 2);
         for (int i = 0; i<obstacleNum; i++) 
         {
@@ -91,6 +97,18 @@ public class GroundHandler : MonoBehaviour
             Vector2 berryPos = new Vector2(x, y);
             berry.transform.position = berryPos;
         }
+        int melonNum = Random.Range(0, 2);
+        if (melonNum == 1)
+        {
+            GameObject melon = Instantiate(melons.gameObject);
+            float y = goGround.groundHeight + 2f;
+            float halfWidth = goCollider.size.x / 2;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.transform.position.x + halfWidth;
+            float x = Random.Range(left + 10, right - 10);
+            Vector2 melonPos = new Vector2(x, y);
+            melon.transform.position = melonPos;
+        }
 
         int bushesNum = Random.Range(0, 6);
         for (int i = 0; i < obstacleNum; i++)
@@ -105,6 +123,44 @@ public class GroundHandler : MonoBehaviour
             box.transform.position = bushPos;
         }
 
+        int tree1Num = Random.Range(0, 2);
+        for (int i = 0; i < tree1Num; i++)
+        {
+            GameObject box = Instantiate(tree1.gameObject);
+            float y = goGround.groundHeight + 3.5f;
+            float halfWidth = goCollider.size.x / 2;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.transform.position.x + halfWidth;
+            float x = Random.Range(left, right);
+            Vector2 tree1Pos = new Vector2(x, y);
+            box.transform.position = tree1Pos;
+        }
+
+        int tree2Num = Random.Range(0, 2);
+        for (int i = 0; i < tree2Num; i++)
+        {
+            GameObject box = Instantiate(tree2.gameObject);
+            float y = goGround.groundHeight + 3.5f;
+            float halfWidth = goCollider.size.x / 2;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.transform.position.x + halfWidth;
+            float x = Random.Range(left, right);
+            Vector2 tree2Pos = new Vector2(x, y);
+            box.transform.position = tree2Pos;
+        }
+
+        int tree3Num = Random.Range(0, 2);
+        for (int i = 0; i < tree3Num; i++)
+        {
+            GameObject box = Instantiate(tree3.gameObject);
+            float y = goGround.groundHeight + 3.5f;
+            float halfWidth = goCollider.size.x / 2;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.transform.position.x + halfWidth;
+            float x = Random.Range(left, right);
+            Vector2 tree3Pos = new Vector2(x, y);
+            box.transform.position = tree3Pos;
+        }
 
     }
 }

@@ -12,6 +12,8 @@ public class UpDown : MonoBehaviour
     Vector3 posOffset = new Vector3();
     Vector3 tempPos = new Vector3();
 
+    private float justForThis;
+
     // Use this for initialization
     void Start()
     {
@@ -26,7 +28,8 @@ public class UpDown : MonoBehaviour
 
         tempPos = posOffset;
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+        justForThis = tempPos.y;
 
-        transform.position = tempPos;
+        transform.position = new Vector2(transform.position.x, justForThis);
     }
 }
